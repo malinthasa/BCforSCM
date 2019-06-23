@@ -14,8 +14,8 @@ networks:
   byfn:
 
 services:
-  zookeeper.example.com:
-    container_name: zookeeper.example.com
+  zookeeper.bc4scm.de:
+    container_name: zookeeper.bc4scm.de
     image: hyperledger/fabric-zookeeper:$IMAGE_TAG
     environment:
       ZOOKEEPER_CLIENT_PORT: 32181
@@ -23,15 +23,15 @@ services:
     networks:
     - byfn
 
-  kafka.example.com:
-    container_name: kafka.example.com
+  kafka.bc4scm.de:
+    container_name: kafka.bc4scm.de
     image: hyperledger/fabric-kafka:$IMAGE_TAG
     depends_on:
-    - zookeeper.example.com
+    - zookeeper.bc4scm.de
     environment:
       - KAFKA_BROKER_ID=1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper.example.com:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka.example.com:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper.bc4scm.de:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka.bc4scm.de:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B

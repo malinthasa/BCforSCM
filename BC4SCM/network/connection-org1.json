@@ -15,40 +15,40 @@
         "Org1": {
             "mspid": "Org1MSP",
             "peers": [
-                "peer0.org1.example.com",
-                "peer1.org1.example.com"
+                "peer0.org1.bc4scm.de",
+                "peer1.org1.bc4scm.de"
             ],
             "certificateAuthorities": [
-                "ca.org1.example.com"
+                "ca.org1.bc4scm.de"
             ]
         }
     },
     "peers": {
-        "peer0.org1.example.com": {
+        "peer0.org1.bc4scm.de": {
             "url": "grpcs://localhost:7051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
+                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer0.org1.example.com"
+                "ssl-target-name-override": "peer0.org1.bc4scm.de"
             }
         },
-        "peer1.org1.example.com": {
+        "peer1.org1.bc4scm.de": {
             "url": "grpcs://localhost:8051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
+                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer1.org1.example.com"
+                "ssl-target-name-override": "peer1.org1.bc4scm.de"
             }
         }
     },
     "certificateAuthorities": {
-        "ca.org1.example.com": {
+        "ca.org1.bc4scm.de": {
             "url": "https://localhost:7054",
             "caName": "ca-org1",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
+                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
             },
             "httpOptions": {
                 "verify": false
