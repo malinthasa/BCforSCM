@@ -76,14 +76,14 @@ docker exec \
     -p "$CC_SRC_PATH" \
     -l "$CC_RUNTIME_LANGUAGE"
 
-echo "Instantiating smart contract on mychannel"
+echo "Instantiating smart contract on iboretailerchannel"
 docker exec \
   -e CORE_PEER_LOCALMSPID=Org1MSP \
   -e CORE_PEER_MSPCONFIGPATH=${ORG1_MSPCONFIGPATH} \
   cli \
   peer chaincode instantiate \
     -o orderer.example.com:7050 \
-    -C mychannel \
+    -C iboretailerchannel \
     -n scmlogic \
     -l "$CC_RUNTIME_LANGUAGE" \
     -v 1.0 \
@@ -97,14 +97,14 @@ docker exec \
 echo "Waiting for instantiation request to be committed ..."
 sleep 10
 
-echo "Submitting initLedger transaction to smart contract on mychannel"
+echo "Submitting initLedger transaction to smart contract on iboretailerchannel"
 docker exec \
   -e CORE_PEER_LOCALMSPID=Org1MSP \
   -e CORE_PEER_MSPCONFIGPATH=${ORG1_MSPCONFIGPATH} \
   cli \
   peer chaincode invoke \
     -o orderer.example.com:7050 \
-    -C mychannel \
+    -C iboretailerchannel \
     -n scmlogic \
     -c '{"function":"initLedger","Args":[]}' \
     --waitForEvent \

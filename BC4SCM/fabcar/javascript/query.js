@@ -30,7 +30,7 @@ async function main() {
         await gateway.connect(ccpPath, { wallet, identity: 'user1', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork('iboretailerchannel');
 
         // Get the contract from the network.
         const contract = network.getContract('scmlogic');
