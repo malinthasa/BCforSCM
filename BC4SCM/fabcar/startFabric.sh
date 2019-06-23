@@ -14,15 +14,15 @@ CC_SRC_LANGUAGE=${1:-"go"}
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 if [ "$CC_SRC_LANGUAGE" = "go" -o "$CC_SRC_LANGUAGE" = "golang"  ]; then
 	CC_RUNTIME_LANGUAGE=golang
-	CC_SRC_PATH=github.com/chaincode/fabcar/go
+	CC_SRC_PATH=github.com/chaincode/scmlogic/go
 elif [ "$CC_SRC_LANGUAGE" = "javascript" ]; then
 	CC_RUNTIME_LANGUAGE=node # chaincode runtime language is node.js
-	CC_SRC_PATH=/opt/gopath/src/github.com/chaincode/fabcar/javascript
+	CC_SRC_PATH=/opt/gopath/src/github.com/chaincode/scmlogic/javascript
 elif [ "$CC_SRC_LANGUAGE" = "typescript" ]; then
 	CC_RUNTIME_LANGUAGE=node # chaincode runtime language is node.js
-	CC_SRC_PATH=/opt/gopath/src/github.com/chaincode/fabcar/typescript
+	CC_SRC_PATH=/opt/gopath/src/github.com/chaincode/scmlogic/typescript
 	echo Compiling TypeScript code into JavaScript ...
-	pushd ../chaincode/fabcar/typescript
+	pushd ../chaincode/scmlogic/typescript
 	npm install
 	npm run build
 	popd
@@ -58,7 +58,7 @@ docker exec \
   -e CORE_PEER_TLS_ROOTCERT_FILE=${ORG1_TLS_ROOTCERT_FILE} \
   cli \
   peer chaincode install \
-    -n fabcar \
+    -n scmlogic \
     -v 1.0 \
     -p "$CC_SRC_PATH" \
     -l "$CC_RUNTIME_LANGUAGE"
@@ -71,7 +71,7 @@ docker exec \
   -e CORE_PEER_TLS_ROOTCERT_FILE=${ORG2_TLS_ROOTCERT_FILE} \
   cli \
   peer chaincode install \
-    -n fabcar \
+    -n scmlogic \
     -v 1.0 \
     -p "$CC_SRC_PATH" \
     -l "$CC_RUNTIME_LANGUAGE"
@@ -84,7 +84,7 @@ docker exec \
   peer chaincode instantiate \
     -o orderer.example.com:7050 \
     -C mychannel \
-    -n fabcar \
+    -n scmlogic \
     -l "$CC_RUNTIME_LANGUAGE" \
     -v 1.0 \
     -c '{"Args":[]}' \
@@ -105,7 +105,7 @@ docker exec \
   peer chaincode invoke \
     -o orderer.example.com:7050 \
     -C mychannel \
-    -n fabcar \
+    -n scmlogic \
     -c '{"function":"initLedger","Args":[]}' \
     --waitForEvent \
     --tls \
