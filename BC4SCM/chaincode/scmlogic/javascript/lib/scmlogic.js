@@ -1,6 +1,3 @@
-/*
- * SPDX-License-Identifier: Apache-2.0
- */
 
 'use strict';
 
@@ -12,13 +9,13 @@ class SCMLogic extends Contract {
         console.info('============= START : Initialize Ledger ===========');
         const products = [
             {
-                id: '123',
+                id: 'BR0',
                 batchno: '#12',
                 type: 'tp01',
                 date: '24062019',
             },
             {
-                id: '456',
+                id: 'BR1',
                 batchno: '#13',
                 type: 'tp004',
                 date: '18052004',
@@ -34,7 +31,7 @@ class SCMLogic extends Contract {
     }
 
     async queryProduct(ctx, productId) {
-        const productAsBytes = await ctx.stub.getState(productId); // get the car from chaincode state
+        const productAsBytes = await ctx.stub.getState(productId);
         if (!productAsBytes || productAsBytes.length === 0) {
             throw new Error(`${productId} does not exist`);
         }
@@ -92,7 +89,7 @@ class SCMLogic extends Contract {
     async changeProductOwner(ctx, productNumber, newOwner) {
         console.info('============= START : changeProductOwner ===========');
 
-        const productAsBytes = await ctx.stub.getState(productNumber); // get the car from chaincode state
+        const productAsBytes = await ctx.stub.getState(productNumber);
         if (!productAsBytes || productAsBytes.length === 0) {
             throw new Error(`${productNumber} does not exist`);
         }
