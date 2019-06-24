@@ -79,15 +79,15 @@ echo "Having all peers join the channel..."
 joinChannel
 
 ## Set the anchor peers for each org in the channel
-echo "Updating anchor peers for org1..."
+echo "Updating anchor peers for ibo..."
 updateAnchorPeers 0 1
 echo "Updating anchor peers for org2..."
 updateAnchorPeers 0 2
 
 if [ "${NO_CHAINCODE}" != "true" ]; then
 
-	## Install chaincode on peer0.org1 and peer0.org2
-	echo "Installing chaincode on peer0.org1..."
+	## Install chaincode on peer0.ibo and peer0.org2
+	echo "Installing chaincode on peer0.ibo..."
 	installChaincode 0 1
 	echo "Install chaincode on peer0.org2..."
 	installChaincode 0 2
@@ -96,12 +96,12 @@ if [ "${NO_CHAINCODE}" != "true" ]; then
 	echo "Instantiating chaincode on peer0.org2..."
 	instantiateChaincode 0 2
 
-	# Query chaincode on peer0.org1
-	echo "Querying chaincode on peer0.org1..."
+	# Query chaincode on peer0.ibo
+	echo "Querying chaincode on peer0.ibo..."
 	chaincodeQuery 0 1 100
 
-	# Invoke chaincode on peer0.org1 and peer0.org2
-	echo "Sending invoke transaction on peer0.org1 peer0.org2..."
+	# Invoke chaincode on peer0.ibo and peer0.org2
+	echo "Sending invoke transaction on peer0.ibo peer0.org2..."
 	chaincodeInvoke 0 1 0 2
 
 	## Install chaincode on peer1.org2

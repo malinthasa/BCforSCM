@@ -7,8 +7,8 @@ version: '2'
 
 volumes:
   orderer.bc4scm.de:
-  peer0.org1.bc4scm.de:
-  peer1.org1.bc4scm.de:
+  peer0.ibo.bc4scm.de:
+  peer1.ibo.bc4scm.de:
   peer0.org2.bc4scm.de:
   peer1.org2.bc4scm.de:
 
@@ -25,19 +25,19 @@ services:
     networks:
       - byfn
 
-  peer0.org1.bc4scm.de:
-    container_name: peer0.org1.bc4scm.de
+  peer0.ibo.bc4scm.de:
+    container_name: peer0.ibo.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.org1.bc4scm.de
+      service: peer0.ibo.bc4scm.de
     networks:
       - byfn
 
-  peer1.org1.bc4scm.de:
-    container_name: peer1.org1.bc4scm.de
+  peer1.ibo.bc4scm.de:
+    container_name: peer1.ibo.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.org1.bc4scm.de
+      service: peer1.ibo.bc4scm.de
     networks:
       - byfn
 
@@ -68,13 +68,13 @@ services:
       #- FABRIC_LOGGING_SPEC=DEBUG
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.org1.bc4scm.de:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ADDRESS=peer0.ibo.bc4scm.de:7051
+      - CORE_PEER_LOCALMSPID=IBOMSP
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.bc4scm.de/peers/peer0.org1.bc4scm.de/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.bc4scm.de/peers/peer0.org1.bc4scm.de/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.bc4scm.de/peers/peer0.org1.bc4scm.de/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.bc4scm.de/users/Admin@org1.bc4scm.de/msp
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de/users/Admin@ibo.bc4scm.de/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
@@ -85,8 +85,8 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - orderer.bc4scm.de
-      - peer0.org1.bc4scm.de
-      - peer1.org1.bc4scm.de
+      - peer0.ibo.bc4scm.de
+      - peer1.ibo.bc4scm.de
       - peer0.org2.bc4scm.de
       - peer1.org2.bc4scm.de
     networks:

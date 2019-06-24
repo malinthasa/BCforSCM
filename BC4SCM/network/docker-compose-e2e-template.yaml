@@ -7,8 +7,8 @@ version: '2'
 
 volumes:
   orderer.bc4scm.de:
-  peer0.org1.bc4scm.de:
-  peer1.org1.bc4scm.de:
+  peer0.ibo.bc4scm.de:
+  peer1.ibo.bc4scm.de:
   peer0.org2.bc4scm.de:
   peer1.org2.bc4scm.de:
 
@@ -19,16 +19,16 @@ services:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca-org1
+      - FABRIC_CA_SERVER_CA_NAME=ca-ibo
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.bc4scm.de-cert.pem
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.ibo.bc4scm.de-cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.bc4scm.de-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.ibo.bc4scm.de-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org1.bc4scm.de/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca_peerOrg1
+      - ./crypto-config/peerOrganizations/ibo.bc4scm.de/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca_peerIBO
     networks:
       - byfn
 
@@ -57,19 +57,19 @@ services:
     networks:
       - byfn
 
-  peer0.org1.bc4scm.de:
-    container_name: peer0.org1.bc4scm.de
+  peer0.ibo.bc4scm.de:
+    container_name: peer0.ibo.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.org1.bc4scm.de
+      service: peer0.ibo.bc4scm.de
     networks:
       - byfn
 
-  peer1.org1.bc4scm.de:
-    container_name: peer1.org1.bc4scm.de
+  peer1.ibo.bc4scm.de:
+    container_name: peer1.ibo.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.org1.bc4scm.de
+      service: peer1.ibo.bc4scm.de
     networks:
       - byfn
 

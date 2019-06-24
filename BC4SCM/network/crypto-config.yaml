@@ -27,10 +27,10 @@ OrdererOrgs:
 # ---------------------------------------------------------------------------
 PeerOrgs:
   # ---------------------------------------------------------------------------
-  # Org1
+  # IBO
   # ---------------------------------------------------------------------------
-  - Name: Org1
-    Domain: org1.bc4scm.de
+  - Name: IBO
+    Domain: ibo.bc4scm.de
     EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
@@ -49,7 +49,7 @@ PeerOrgs:
     #                 Org.Domain, respectively.
     # ---------------------------------------------------------------------------
     # Specs:
-    #   - Hostname: foo # implicitly "foo.org1.bc4scm.de"
+    #   - Hostname: foo # implicitly "foo.ibo.bc4scm.de"
     #     CommonName: foo27.org5.bc4scm.de # overrides Hostname-based FQDN set above
     #   - Hostname: bar
     #   - Hostname: baz
@@ -77,7 +77,7 @@ PeerOrgs:
     Users:
       Count: 1
   # ---------------------------------------------------------------------------
-  # Org2: See "Org1" for full specification
+  # Org2: See "ibo" for full specification
   # ---------------------------------------------------------------------------
   - Name: Org2
     Domain: org2.bc4scm.de

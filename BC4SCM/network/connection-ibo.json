@@ -1,8 +1,8 @@
 {
-    "name": "network-org1",
+    "name": "network-ibo",
     "version": "1.0.0",
     "client": {
-        "organization": "Org1",
+        "organization": "IBO",
         "connection": {
             "timeout": {
                 "peer": {
@@ -12,43 +12,43 @@
         }
     },
     "organizations": {
-        "Org1": {
-            "mspid": "Org1MSP",
+        "IBO": {
+            "mspid": "IBOMSP",
             "peers": [
-                "peer0.org1.bc4scm.de",
-                "peer1.org1.bc4scm.de"
+                "peer0.ibo.bc4scm.de",
+                "peer1.ibo.bc4scm.de"
             ],
             "certificateAuthorities": [
-                "ca.org1.bc4scm.de"
+                "ca.ibo.bc4scm.de"
             ]
         }
     },
     "peers": {
-        "peer0.org1.bc4scm.de": {
+        "peer0.ibo.bc4scm.de": {
             "url": "grpcs://localhost:7051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/ibo.bc4scm.de/tlsca/tlsca.ibo.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer0.org1.bc4scm.de"
+                "ssl-target-name-override": "peer0.ibo.bc4scm.de"
             }
         },
-        "peer1.org1.bc4scm.de": {
+        "peer1.ibo.bc4scm.de": {
             "url": "grpcs://localhost:8051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/ibo.bc4scm.de/tlsca/tlsca.ibo.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer1.org1.bc4scm.de"
+                "ssl-target-name-override": "peer1.ibo.bc4scm.de"
             }
         }
     },
     "certificateAuthorities": {
-        "ca.org1.bc4scm.de": {
+        "ca.ibo.bc4scm.de": {
             "url": "https://localhost:7054",
-            "caName": "ca-org1",
+            "caName": "ca-ibo",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org1.bc4scm.de/tlsca/tlsca.org1.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/ibo.bc4scm.de/tlsca/tlsca.ibo.bc4scm.de-cert.pem"
             },
             "httpOptions": {
                 "verify": false

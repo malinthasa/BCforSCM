@@ -35,20 +35,20 @@ echo "Channel name : "$CHANNEL_NAME
 
 sleep $DELAY
 
-#Query on chaincode on Peer0/Org1
-echo "Querying chaincode on org1/peer0..."
+#Query on chaincode on Peer0/ibo
+echo "Querying chaincode on ibo/peer0..."
 chaincodeQuery 0 1 90
 
 sleep $DELAY
 
-#Invoke on chaincode on Peer0/Org1
-echo "Sending invoke transaction on org1/peer0..."
+#Invoke on chaincode on Peer0/ibo
+echo "Sending invoke transaction on ibo/peer0..."
 chaincodeInvoke 0 1 0 2
 
 sleep $DELAY
 
-#Query on chaincode on Peer0/Org1
-echo "Querying chaincode on org1/peer0..."
+#Query on chaincode on Peer0/ibo
+echo "Querying chaincode on ibo/peer0..."
 chaincodeQuery 0 1 80
 
 echo

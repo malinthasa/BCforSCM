@@ -9,15 +9,17 @@ const { FileSystemWallet, X509WalletMixin } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', '..', 'network', 'connection-org1.json');
+const ccpPath = path.resolve(__dirname, '..', '..', 'network', 'connection-ibo.json');
 const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 const ccp = JSON.parse(ccpJSON);
 
 async function main() {
     try {
 
+      
+
         // Create a new CA client for interacting with the CA.
-        const caInfo = ccp.certificateAuthorities['ca.org1.bc4scm.de'];
+        const caInfo = ccp.certificateAuthorities['ca.ibo.bc4scm.de'];
         const caTLSCACertsPath = path.resolve(__dirname, '..', '..', 'network', caInfo.tlsCACerts.path);
         const caTLSCACerts = fs.readFileSync(caTLSCACertsPath);
         const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
@@ -36,7 +38,7 @@ async function main() {
 
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
-        const identity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
+        const identity = X509WalletMixin.createIdentity('IBOMSP', enrollment.certificate, enrollment.key.toBytes());
         await wallet.import('admin', identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
 

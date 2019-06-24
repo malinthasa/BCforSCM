@@ -41,15 +41,15 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Org1
+    - &IBO
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Org1MSP
+        Name: IBOMSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: IBOMSP
 
-        MSPDir: crypto-config/peerOrganizations/org1.bc4scm.de/msp
+        MSPDir: crypto-config/peerOrganizations/ibo.bc4scm.de/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -57,20 +57,20 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('IBOMSP.admin', 'IBOMSP.peer', 'IBOMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('IBOMSP.admin', 'IBOMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('IBOMSP.admin')"
 
         # leave this flag set to true.
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.org1.bc4scm.de
+            - Host: peer0.ibo.bc4scm.de
               Port: 7051
 
     - &Org2
@@ -310,7 +310,7 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Org1
+                    - *IBO
                     - *Org2
     TwoOrgsChannel:
         Consortium: SampleConsortium
@@ -318,7 +318,7 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
+                - *IBO
                 - *Org2
             Capabilities:
                 <<: *ApplicationCapabilities
@@ -345,7 +345,7 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                - *Org1
+                - *IBO
                 - *Org2
 
     SampleMultiNodeEtcdRaft:
@@ -395,5 +395,5 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                - *Org1
+                - *IBO
                 - *Org2

@@ -20,47 +20,47 @@ services:
     ports:
       - 7050:7050
 
-  peer0.org1.bc4scm.de:
-    container_name: peer0.org1.bc4scm.de
+  peer0.ibo.bc4scm.de:
+    container_name: peer0.ibo.bc4scm.de
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer0.org1.bc4scm.de
-      - CORE_PEER_ADDRESS=peer0.org1.bc4scm.de:7051
+      - CORE_PEER_ID=peer0.ibo.bc4scm.de
+      - CORE_PEER_ADDRESS=peer0.ibo.bc4scm.de:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.org1.bc4scm.de:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.ibo.bc4scm.de:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.bc4scm.de:8051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.bc4scm.de:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.ibo.bc4scm.de:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.ibo.bc4scm.de:7051
+      - CORE_PEER_LOCALMSPID=IBOMSP
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/org1.bc4scm.de/peers/peer0.org1.bc4scm.de/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/org1.bc4scm.de/peers/peer0.org1.bc4scm.de/tls:/etc/hyperledger/fabric/tls
-        - peer0.org1.bc4scm.de:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls:/etc/hyperledger/fabric/tls
+        - peer0.ibo.bc4scm.de:/var/hyperledger/production
     ports:
       - 7051:7051
 
-  peer1.org1.bc4scm.de:
-    container_name: peer1.org1.bc4scm.de
+  peer1.ibo.bc4scm.de:
+    container_name: peer1.ibo.bc4scm.de
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer1.org1.bc4scm.de
-      - CORE_PEER_ADDRESS=peer1.org1.bc4scm.de:8051
+      - CORE_PEER_ID=peer1.ibo.bc4scm.de
+      - CORE_PEER_ADDRESS=peer1.ibo.bc4scm.de:8051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
-      - CORE_PEER_CHAINCODEADDRESS=peer1.org1.bc4scm.de:8052
+      - CORE_PEER_CHAINCODEADDRESS=peer1.ibo.bc4scm.de:8052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.bc4scm.de:8051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.bc4scm.de:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.ibo.bc4scm.de:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.ibo.bc4scm.de:7051
+      - CORE_PEER_LOCALMSPID=IBOMSP
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/org1.bc4scm.de/peers/peer1.org1.bc4scm.de/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/org1.bc4scm.de/peers/peer1.org1.bc4scm.de/tls:/etc/hyperledger/fabric/tls
-        - peer1.org1.bc4scm.de:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/ibo.bc4scm.de/peers/peer1.ibo.bc4scm.de/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/ibo.bc4scm.de/peers/peer1.ibo.bc4scm.de/tls:/etc/hyperledger/fabric/tls
+        - peer1.ibo.bc4scm.de:/var/hyperledger/production
 
     ports:
       - 8051:8051
