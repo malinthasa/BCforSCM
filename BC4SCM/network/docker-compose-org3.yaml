@@ -88,7 +88,7 @@ services:
         - ./../chaincode/:/opt/gopath/src/github.com/chaincode
         - ./org3-artifacts/crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./crypto-config/peerOrganizations/ibo.bc4scm.de:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de
-        - ./crypto-config/peerOrganizations/org2.bc4scm.de:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.bc4scm.de
+        - ./crypto-config/peerOrganizations/retailer.bc4scm.de:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/retailer.bc4scm.de
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
     depends_on:
       - peer0.org3.bc4scm.de

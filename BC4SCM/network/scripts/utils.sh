@@ -8,7 +8,7 @@
 
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bc4scm.de/orderers/orderer.bc4scm.de/msp/tlscacerts/tlsca.bc4scm.de-cert.pem
 PEER0_IBO_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls/ca.crt
-PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.bc4scm.de/peers/peer0.org2.bc4scm.de/tls/ca.crt
+PEER0_Retailer_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/retailer.bc4scm.de/peers/peer0.retailer.bc4scm.de/tls/ca.crt
 PEER0_ORG3_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.bc4scm.de/peers/peer0.org3.bc4scm.de/tls/ca.crt
 
 # verify the result of the end-to-end test
@@ -41,13 +41,13 @@ setGlobals() {
       CORE_PEER_ADDRESS=peer1.ibo.bc4scm.de:8051
     fi
   elif [ $ORG -eq 2 ]; then
-    CORE_PEER_LOCALMSPID="Org2MSP"
-    CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
-    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.bc4scm.de/users/Admin@org2.bc4scm.de/msp
+    CORE_PEER_LOCALMSPID="RetailerMSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_Retailer_CA
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/retailer.bc4scm.de/users/Admin@retailer.bc4scm.de/msp
     if [ $PEER -eq 0 ]; then
-      CORE_PEER_ADDRESS=peer0.org2.bc4scm.de:9051
+      CORE_PEER_ADDRESS=peer0.retailer.bc4scm.de:9051
     else
-      CORE_PEER_ADDRESS=peer1.org2.bc4scm.de:10051
+      CORE_PEER_ADDRESS=peer1.retailer.bc4scm.de:10051
     fi
 
   elif [ $ORG -eq 3 ]; then
@@ -139,12 +139,12 @@ instantiateChaincode() {
   # the "-o" option
   if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
     set -x
-    peer chaincode instantiate -o orderer.bc4scm.de:7050 -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v ${VERSION} -c '{"Args":["init","a","100","b","200"]}' -P "AND ('IBOMSP.peer','Org2MSP.peer')" >&log.txt
+    peer chaincode instantiate -o orderer.bc4scm.de:7050 -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v ${VERSION} -c '{"Args":["init","a","100","b","200"]}' -P "AND ('IBOMSP.peer','RetailerMSP.peer')" >&log.txt
     res=$?
     set +x
   else
     set -x
-    peer chaincode instantiate -o orderer.bc4scm.de:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "AND ('IBOMSP.peer','Org2MSP.peer')" >&log.txt
+    peer chaincode instantiate -o orderer.bc4scm.de:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "AND ('IBOMSP.peer','RetailerMSP.peer')" >&log.txt
     res=$?
     set +x
   fi
@@ -160,7 +160,7 @@ upgradeChaincode() {
   setGlobals $PEER $ORG
 
   set -x
-  peer chaincode upgrade -o orderer.bc4scm.de:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -c '{"Args":["init","a","90","b","210"]}' -P "AND ('IBOMSP.peer','Org2MSP.peer','Org3MSP.peer')"
+  peer chaincode upgrade -o orderer.bc4scm.de:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -c '{"Args":["init","a","90","b","210"]}' -P "AND ('IBOMSP.peer','RetailerMSP.peer','Org3MSP.peer')"
   res=$?
   set +x
   cat log.txt

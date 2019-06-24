@@ -9,8 +9,8 @@ volumes:
   orderer.bc4scm.de:
   peer0.ibo.bc4scm.de:
   peer1.ibo.bc4scm.de:
-  peer0.org2.bc4scm.de:
-  peer1.org2.bc4scm.de:
+  peer0.retailer.bc4scm.de:
+  peer1.retailer.bc4scm.de:
 
 networks:
   byfn:
@@ -41,19 +41,19 @@ services:
     networks:
       - byfn
 
-  peer0.org2.bc4scm.de:
-    container_name: peer0.org2.bc4scm.de
+  peer0.retailer.bc4scm.de:
+    container_name: peer0.retailer.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.org2.bc4scm.de
+      service: peer0.retailer.bc4scm.de
     networks:
       - byfn
 
-  peer1.org2.bc4scm.de:
-    container_name: peer1.org2.bc4scm.de
+  peer1.retailer.bc4scm.de:
+    container_name: peer1.retailer.bc4scm.de
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.org2.bc4scm.de
+      service: peer1.retailer.bc4scm.de
     networks:
       - byfn
 
@@ -87,7 +87,7 @@ services:
       - orderer.bc4scm.de
       - peer0.ibo.bc4scm.de
       - peer1.ibo.bc4scm.de
-      - peer0.org2.bc4scm.de
-      - peer1.org2.bc4scm.de
+      - peer0.retailer.bc4scm.de
+      - peer1.retailer.bc4scm.de
     networks:
       - byfn

@@ -11,7 +11,7 @@ const ccpPath = path.resolve(__dirname, '..', '..', 'network', 'connection-ibo.j
 
 async function main() {
     try {
-        let user = 'user7';
+        let user = 'user1';
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);

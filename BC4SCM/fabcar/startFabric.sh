@@ -45,8 +45,8 @@ echo y | ./byfn.sh up -a -n -s couchdb
 CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer
 IBO_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/ibo.bc4scm.de/users/Admin@ibo.bc4scm.de/msp
 IBO_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/ibo.bc4scm.de/peers/peer0.ibo.bc4scm.de/tls/ca.crt
-ORG2_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/org2.bc4scm.de/users/Admin@org2.bc4scm.de/msp
-ORG2_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/org2.bc4scm.de/peers/peer0.org2.bc4scm.de/tls/ca.crt
+Retailer_MSPCONFIGPATH=${CONFIG_ROOT}/crypto/peerOrganizations/retailer.bc4scm.de/users/Admin@retailer.bc4scm.de/msp
+Retailer_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/peerOrganizations/retailer.bc4scm.de/peers/peer0.retailer.bc4scm.de/tls/ca.crt
 ORDERER_TLS_ROOTCERT_FILE=${CONFIG_ROOT}/crypto/ordererOrganizations/bc4scm.de/orderers/orderer.bc4scm.de/msp/tlscacerts/tlsca.bc4scm.de-cert.pem
 set -x
 
@@ -63,12 +63,12 @@ docker exec \
     -p "$CC_SRC_PATH" \
     -l "$CC_RUNTIME_LANGUAGE"
 
-echo "Installing smart contract on peer0.org2.bc4scm.de"
+echo "Installing smart contract on peer0.retailer.bc4scm.de"
 docker exec \
-  -e CORE_PEER_LOCALMSPID=Org2MSP \
-  -e CORE_PEER_ADDRESS=peer0.org2.bc4scm.de:9051 \
-  -e CORE_PEER_MSPCONFIGPATH=${ORG2_MSPCONFIGPATH} \
-  -e CORE_PEER_TLS_ROOTCERT_FILE=${ORG2_TLS_ROOTCERT_FILE} \
+  -e CORE_PEER_LOCALMSPID=RetailerMSP \
+  -e CORE_PEER_ADDRESS=peer0.retailer.bc4scm.de:9051 \
+  -e CORE_PEER_MSPCONFIGPATH=${Retailer_MSPCONFIGPATH} \
+  -e CORE_PEER_TLS_ROOTCERT_FILE=${Retailer_TLS_ROOTCERT_FILE} \
   cli \
   peer chaincode install \
     -n scmlogic \
@@ -88,7 +88,7 @@ docker exec \
     -l "$CC_RUNTIME_LANGUAGE" \
     -v 1.0 \
     -c '{"Args":[]}' \
-    -P "AND('IBOMSP.member','Org2MSP.member')" \
+    -P "AND('IBOMSP.member','RetailerMSP.member')" \
     --tls \
     --cafile ${ORDERER_TLS_ROOTCERT_FILE} \
     --peerAddresses peer0.ibo.bc4scm.de:7051 \
@@ -111,9 +111,9 @@ docker exec \
     --tls \
     --cafile ${ORDERER_TLS_ROOTCERT_FILE} \
     --peerAddresses peer0.ibo.bc4scm.de:7051 \
-    --peerAddresses peer0.org2.bc4scm.de:9051 \
+    --peerAddresses peer0.retailer.bc4scm.de:9051 \
     --tlsRootCertFiles ${IBO_TLS_ROOTCERT_FILE} \
-    --tlsRootCertFiles ${ORG2_TLS_ROOTCERT_FILE}
+    --tlsRootCertFiles ${Retailer_TLS_ROOTCERT_FILE}
 set +x
 
 cat <<EOF

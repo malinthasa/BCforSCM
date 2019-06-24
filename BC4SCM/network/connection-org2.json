@@ -1,8 +1,8 @@
 {
-    "name": "network-org2",
+    "name": "network-retailer",
     "version": "1.0.0",
     "client": {
-        "organization": "Org2",
+        "organization": "Retailer",
         "connection": {
             "timeout": {
                 "peer": {
@@ -12,43 +12,43 @@
         }
     },
     "organizations": {
-        "Org2": {
-            "mspid": "Org2MSP",
+        "Retailer": {
+            "mspid": "RetailerMSP",
             "peers": [
-                "peer0.org2.bc4scm.de",
-                "peer1.org2.bc4scm.de"
+                "peer0.retailer.bc4scm.de",
+                "peer1.retailer.bc4scm.de"
             ],
             "certificateAuthorities": [
-                "ca.org2.bc4scm.de"
+                "ca.retailer.bc4scm.de"
             ]
         }
     },
     "peers": {
-        "peer0.org2.bc4scm.de": {
+        "peer0.retailer.bc4scm.de": {
             "url": "grpcs://localhost:9051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org2.bc4scm.de/tlsca/tlsca.org2.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/retailer.bc4scm.de/tlsca/tlsca.retailer.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer0.org2.bc4scm.de"
+                "ssl-target-name-override": "peer0.retailer.bc4scm.de"
             }
         },
-        "peer1.org2.bc4scm.de": {
+        "peer1.retailer.bc4scm.de": {
             "url": "grpcs://localhost:10051",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org2.bc4scm.de/tlsca/tlsca.org2.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/retailer.bc4scm.de/tlsca/tlsca.retailer.bc4scm.de-cert.pem"
             },
             "grpcOptions": {
-                "ssl-target-name-override": "peer1.org2.bc4scm.de"
+                "ssl-target-name-override": "peer1.retailer.bc4scm.de"
             }
         }
     },
     "certificateAuthorities": {
-        "ca.org2.bc4scm.de": {
+        "ca.retailer.bc4scm.de": {
             "url": "https://localhost:8054",
-            "caName": "ca-org2",
+            "caName": "ca-retailer",
             "tlsCACerts": {
-                "path": "crypto-config/peerOrganizations/org2.bc4scm.de/tlsca/tlsca.org2.bc4scm.de-cert.pem"
+                "path": "crypto-config/peerOrganizations/retailer.bc4scm.de/tlsca/tlsca.retailer.bc4scm.de-cert.pem"
             },
             "httpOptions": {
                 "verify": false

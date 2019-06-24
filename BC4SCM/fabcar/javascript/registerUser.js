@@ -12,7 +12,7 @@ const ccpPath = path.resolve(__dirname, '..', '..', 'network', 'connection-ibo.j
 async function main() {
     try {
 
-        let user = 'user7';
+        let user = 'user1';
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
@@ -44,6 +44,12 @@ async function main() {
         let affiliationService = ca.newAffiliationService();
 
 
+        //To register the new organization
+        // let registeredAffiliations = await affiliationService.getAll(adminIdentity);
+        //      await affiliationService.create({
+        //       name: 'ibo.department1',
+        //       force: true}, adminIdentity);
+
 
         // Register the user, enroll the user, and import the new identity into the wallet.
         const secret = await ca.register({ affiliation: 'ibo.department1', enrollmentID: user, role: 'client' }, adminIdentity);
@@ -51,11 +57,7 @@ async function main() {
         const userIdentity = X509WalletMixin.createIdentity('IBOMSP', enrollment.certificate, enrollment.key.toBytes());
         await wallet.import(user, userIdentity);
 
-        //To register the new organization 
-        // let registeredAffiliations = await affiliationService.getAll(adminIdentity);
-        //      await affiliationService.create({
-        //       name: 'ibo.department1',
-        //       force: true}, adminIdentity);
+
 
         console.log('Successfully registered and enrolled admin user '+ user +' and imported it into the wallet');
 

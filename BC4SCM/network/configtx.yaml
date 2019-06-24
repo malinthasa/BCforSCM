@@ -73,15 +73,15 @@ Organizations:
             - Host: peer0.ibo.bc4scm.de
               Port: 7051
 
-    - &Org2
+    - &Retailer
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Org2MSP
+        Name: RetailerMSP
 
         # ID to load the MSP definition as
-        ID: Org2MSP
+        ID: RetailerMSP
 
-        MSPDir: crypto-config/peerOrganizations/org2.bc4scm.de/msp
+        MSPDir: crypto-config/peerOrganizations/retailer.bc4scm.de/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -89,19 +89,19 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+                Rule: "OR('RetailerMSP.admin', 'RetailerMSP.peer', 'RetailerMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+                Rule: "OR('RetailerMSP.admin', 'RetailerMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin')"
+                Rule: "OR('RetailerMSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.org2.bc4scm.de
+            - Host: peer0.retailer.bc4scm.de
               Port: 9051
 
 ################################################################################
@@ -311,7 +311,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *IBO
-                    - *Org2
+                    - *Retailer
     TwoOrgsChannel:
         Consortium: SampleConsortium
         <<: *ChannelDefaults
@@ -319,7 +319,7 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *IBO
-                - *Org2
+                - *Retailer
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -346,7 +346,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                 - *IBO
-                - *Org2
+                - *Retailer
 
     SampleMultiNodeEtcdRaft:
         <<: *ChannelDefaults
@@ -396,4 +396,4 @@ Profiles:
             SampleConsortium:
                 Organizations:
                 - *IBO
-                - *Org2
+                - *Retailer
