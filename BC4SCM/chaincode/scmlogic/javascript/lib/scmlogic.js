@@ -10,56 +10,56 @@ class SCMLogic extends Contract {
 
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        const cars = [
+        const products = [
             {
-                color: 'blue',
-                make: 'Toyota',
-                model: 'Prius',
-                owner: 'Tomoko',
+                id: '123',
+                batchno: '#12',
+                type: 'tp01',
+                date: '24062019',
             },
             {
-                color: 'red',
-                make: 'Ford',
-                model: 'Mustang',
-                owner: 'Brad',
+                id: '456',
+                batchno: '#13',
+                type: 'tp004',
+                date: '18052004',
             }
         ];
 
-        for (let i = 0; i < cars.length; i++) {
-            cars[i].docType = 'car';
-            await ctx.stub.putState('CAR' + i, Buffer.from(JSON.stringify(cars[i])));
-            console.info('Added <--> ', cars[i]);
+        for (let i = 0; i < products.length; i++) {
+            products[i].docType = 'bearing';
+            await ctx.stub.putState('BR' + i, Buffer.from(JSON.stringify(products[i])));
+            console.info('Added <--> ', products[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
-    async queryCar(ctx, carNumber) {
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+    async queryProduct(ctx, productId) {
+        const productAsBytes = await ctx.stub.getState(productId); // get the car from chaincode state
+        if (!productAsBytes || productAsBytes.length === 0) {
+            throw new Error(`${productId} does not exist`);
         }
-        console.log(carAsBytes.toString());
-        return carAsBytes.toString();
+        console.log(productAsBytes.toString());
+        return productAsBytes.toString();
     }
 
-    async createCar(ctx, carNumber, make, model, color, owner) {
-        console.info('============= START : Create Car ===========');
+    async createProduct(ctx, productId, make, model, color, owner) {
+        console.info('============= START : Create Product ===========');
 
-        const car = {
-            color,
-            docType: 'car',
-            make,
-            model,
-            owner,
+        const product = {
+            id,
+            docType: 'bearing',
+            batchno,
+            type,
+            date,
         };
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : Create Car ===========');
+        await ctx.stub.putState(productId, Buffer.from(JSON.stringify(product)));
+        console.info('============= END : Create Product ===========');
     }
 
-    async queryAllCars1(ctx) {
-        const startKey = 'CAR0';
-        const endKey = 'CAR999';
+    async queryAllProducts(ctx) {
+        const startKey = 'BR0';
+        const endKey = 'BR999';
 
         const iterator = await ctx.stub.getStateByRange(startKey, endKey);
 
@@ -89,18 +89,18 @@ class SCMLogic extends Contract {
         }
     }
 
-    async changeCarOwner(ctx, carNumber, newOwner) {
-        console.info('============= START : changeCarOwner ===========');
+    async changeProductOwner(ctx, productNumber, newOwner) {
+        console.info('============= START : changeProductOwner ===========');
 
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+        const productAsBytes = await ctx.stub.getState(productNumber); // get the car from chaincode state
+        if (!productAsBytes || productAsBytes.length === 0) {
+            throw new Error(`${productNumber} does not exist`);
         }
-        const car = JSON.parse(carAsBytes.toString());
-        car.owner = newOwner;
+        const product = JSON.parse(productAsBytes.toString());
+        product.owner = newOwner;
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : changeCarOwner ===========');
+        await ctx.stub.putState(productNumber, Buffer.from(JSON.stringify(product)));
+        console.info('============= END : changeProductOwner ===========');
     }
 
 }

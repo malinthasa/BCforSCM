@@ -50,14 +50,11 @@ async function main() {
         //       name: 'ibo.department1',
         //       force: true}, adminIdentity);
 
-
         // Register the user, enroll the user, and import the new identity into the wallet.
         const secret = await ca.register({ affiliation: 'ibo.department1', enrollmentID: user, role: 'client' }, adminIdentity);
         const enrollment = await ca.enroll({ enrollmentID: user, enrollmentSecret: secret });
         const userIdentity = X509WalletMixin.createIdentity('IBOMSP', enrollment.certificate, enrollment.key.toBytes());
         await wallet.import(user, userIdentity);
-
-
 
         console.log('Successfully registered and enrolled admin user '+ user +' and imported it into the wallet');
 
